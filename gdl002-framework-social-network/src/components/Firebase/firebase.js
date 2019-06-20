@@ -17,11 +17,11 @@ class Firebase {
     this.auth = app.auth();
   }
   //Auth API (Interfaz de Autenticación para componentes React que se conectaran a la API de FIrebase).
-  doCreateUserWhitEmailAndPassword = (email, password) =>
+  doCreateUserWithEmailAndPassword = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
   //Función de Inicio de Sesión
-  doSignInWhithEmailAndPassword = (email, password) =>
-    this.auth.signInWithEmailAndPassword(email.password);
+  doSignInWithEmailAndPassword = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
   //Si no se autentica ningun usuario, no ocurrirá nada
   doSignOut = () => this.auth.signOut();
   //Dos métodos de autenticación más para restablecer y cambiar una contraseña para un usuario autenticado

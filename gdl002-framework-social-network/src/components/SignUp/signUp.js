@@ -68,24 +68,24 @@ class SignUpFormBase extends Component {
           value={email}
           onChange={this.onChange}
           type="text"
-          placeholder="correo electronico"
+          placeholder="Dirección de correo"
         />
         <input
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
-          placeholder="contraseña"
+          placeholder="Contraseña"
         />
         <input
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
-          placeholder="confirma tu contraseña"
+          placeholder="Confirma tu contraseña"
         />
         <button disabled={isInvalid} type="submit">
-          Registrarse
+          Registrar
         </button>
         {error && <p>{error.message}</p>}
       </form>

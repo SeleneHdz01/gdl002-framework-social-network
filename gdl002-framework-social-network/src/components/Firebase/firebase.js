@@ -24,6 +24,7 @@ class Firebase {
     this.auth.signInWithEmailAndPassword(email, password);
   //Si no se autentica ningun usuario, no ocurrirá nada
   doSignOut = () => this.auth.signOut();
+
   //Dos métodos de autenticación más para restablecer y cambiar una contraseña para un usuario autenticado
   doPasswordReset = email => this.auth.sendPasswordReserEmail(email);
 

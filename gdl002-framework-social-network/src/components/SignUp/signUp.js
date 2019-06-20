@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-// import { compose } from "recompose";
+import { compose } from "recompose";
 
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
@@ -19,6 +19,7 @@ const INITIAL_STATE = {
   passwordTwo: "",
   error: null
 };
+
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +33,7 @@ class SignUpFormBase extends Component {
       .doCreateUserWhitEmailAndPassword(email, passwordOne)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
-        // this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
         this.setState({ error });
@@ -96,7 +97,13 @@ const SignUpLink = () => (
     ¿No tienes una cuenta? <Link to={ROUTES.SIGN_UP}>Regístrate</Link>
   </p>
 );
+//Función de anidamiento (paracomponentes de orden superior) para comunicarse entre sí.
+//"Compose" aplica a los componentesde orden superios de derecha a izquierda
+const SignUpForm = compose(
+  withRouter,
+  withFirebase
+)(SignUpFormBase);
 
-const SignUpForm = withFirebase(SignUpFormBase);
+// const SignUpForm = withRouter(withFirebase(SignUpFormBase));
 export default SignUpPage;
 export { SignUpForm, SignUpLink };

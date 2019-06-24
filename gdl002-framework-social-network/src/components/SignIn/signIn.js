@@ -8,7 +8,7 @@ import * as ROUTES from "../../constants/routes";
 
 const SignInPage = () => (
   <div>
-    <h1>SignIn</h1>
+    <h1>Inicia sesión</h1>
     <SignInForm />
     <SignUpLink />
   </div>
@@ -69,7 +69,7 @@ class SignInFormBase extends Component {
           placeholder="Contraseña"
         />
         <button disabled={isInvalid} type="submit">
-          Inicia sesión
+          Iniciar
         </button>
 
         {error && <p>{error.message}</p>}

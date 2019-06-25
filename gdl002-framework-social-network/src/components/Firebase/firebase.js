@@ -31,6 +31,13 @@ class Firebase {
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
+
+  //Implementando API para bases de datos en tiempo real
+  //Las rutas en el método ref() coinciden con la ubicación donde sus entidades(usuarios)
+  //se almacenarán en la BD en tiempo real de la API de Firebase.
+  user = uid => this.db.ref(`users/${uid}`);
+
+  users = () => this.db.ref("users");
 }
 
 export default Firebase;

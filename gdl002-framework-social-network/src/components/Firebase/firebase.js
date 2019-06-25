@@ -1,5 +1,6 @@
 import app from "firebase/app";
 import "firebase/auth";
+import "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -15,6 +16,7 @@ class Firebase {
     app.initializeApp(firebaseConfig);
 
     this.auth = app.auth();
+    this.db = app.database();
   }
   //Auth API (Interfaz de Autenticación para componentes React que se conectaran a la API de FIrebase).
   doCreateUserWithEmailAndPassword = (email, password) =>

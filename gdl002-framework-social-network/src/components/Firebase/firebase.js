@@ -26,7 +26,7 @@ class Firebase {
   doSignOut = () => this.auth.signOut();
 
   //Dos métodos de autenticación más para restablecer y cambiar una contraseña para un usuario autenticado
-  doPasswordReset = email => this.auth.sendPasswordReserEmail(email);
+  doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
 }

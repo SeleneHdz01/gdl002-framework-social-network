@@ -32,6 +32,18 @@ class SignUpFormBase extends Component {
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        //Creando usuario en Realtime database.
+        //Se crea un usuario en la BD de autenticación interna de Firebase que tiene acceso limitado.
+        //Si es así, crea usuario en la BD en Realtime Database que es accesible.
+        //Para crear usuario usa identificador(uid)del usuario de la BD, luego el método set()
+        //para proporcionar datos para esta entidadque se asigna a usuarios "uid".
+        //Por último se puede usar "username" para dar información adicional acerca de un usuario.
+        return this.props.firebase.user(authUser.user.uid).set({
+          username,
+          email
+        });
+      })
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })

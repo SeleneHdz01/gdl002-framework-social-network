@@ -32,12 +32,42 @@ class Firebase {
 
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
 
-  //Implementando API para bases de datos en tiempo real
+  // *** Merge Auth and DB User API *** //
+  onAuthUserListener = (next, fallback) =>
+    this.auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        this.user(authUser.uid)
+          .once("value")
+          .then(snapshot => {
+            const dbUser = snapshot.val();
+            // default empty roles
+            if (!dbUser.roles) {
+              dbUser.roles = [];
+            }
+            // merge auth and db user
+            authUser = {
+              uid: authUser.uid,
+              email: authUser.email,
+              ...dbUser
+            };
+            next(authUser);
+          });
+      } else {
+        fallback();
+      }
+    });
+
+  //** *Implementando API para bases de datos en tiempo real(REALTIME DATABASE)**
   //Las rutas en el método ref() coinciden con la ubicación donde sus entidades(usuarios)
   //se almacenarán en la BD en tiempo real de la API de Firebase.
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref("users");
+
+  // *** Message API ***
+  message = uid => this.db.ref(`messages/${uid}`);
+
+  messages = () => this.db.ref("messages");
 }
 
 export default Firebase;

@@ -32,8 +32,10 @@ class AdminPage extends Component {
   componentWillUnmount() {
     this.props.firebase.users().off();
   }
+
   render() {
     const { users, loading } = this.state;
+
     return (
       <div>
         <h1>Admin</h1>
@@ -45,7 +47,7 @@ class AdminPage extends Component {
     );
   }
 }
-
+//Para administrar usuarios
 const UserList = ({ users }) => (
   <ul>
     {users.map(user => (
